@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Domain.Entities
 {
-    internal class Candidate
+    public class Candidate
     {
+        public Guid Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; }
+        public Guid ElectionId { get; set; }
     }
 }
