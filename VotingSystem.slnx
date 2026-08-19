@@ -1,3 +1,9 @@
 <Solution>
-  <Project Path="VotingSystem/VotingSystem.csproj" />
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+  </Folder>
+  <Project Path="Application/Application.csproj" Id="5698e34f-0628-4f8c-a301-acd98b36c3d9" />
+  <Project Path="Domain/Domain.csproj" Id="705afc94-dd19-4328-b86e-2e524ad98e7e" />
+  <Project Path="Infrastructure/Infrastructure.csproj" Id="1445ba75-7260-4c1d-b139-b4479529a7d8" />
+  <Project Path="VotingSystem/API.csproj" />
 </Solution>
