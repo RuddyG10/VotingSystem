@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "/n6UTmhkUFw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\rgome\\source\\repos\\VotingSystem\\VotingSystem\\VotingSystem.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rgome\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.11\\microsoft.aspnetcore.openapi.10.0.11.nupkg.sha512",
+    "C:\\Users\\rgome\\.nuget\\packages\\microsoft.openapi\\2.7.5\\microsoft.openapi.2.7.5.nupkg.sha512"
+  ],
+  "logs": []
+}
