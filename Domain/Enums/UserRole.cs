@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Domain.Enums
 {
-    internal class UserRole
+    public enum UserRole
     {
+        Admin,
+        Voter
     }
 }
