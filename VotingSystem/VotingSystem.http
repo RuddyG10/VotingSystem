@@ -13,10 +13,30 @@ POST {{VotingSystem_HostAddress}}/api/elections
 Content-Type: application/json
 
 {
-  "name": "",
+  "name": "Elections",
   "description": "Prueba incorrecta",
   "startDate": "2026-09-15T18:00:00",
   "endDate": "2026-09-15T08:00:00"
 }
+
+###
+### Update election
+
+PUT {{VotingSystem_HostAddress}}/api/elections/a3debefd-d300-4061-8a3b-402118fab7d9
+Content-Type: application/json
+
+{
+  "name": "Elecciones Actualizadas 2026",
+  "description": "Updated election",
+  "startDate": "2026-09-20T08:00:00",
+  "endDate": "2026-09-20T18:00:00",
+  "isActive": true
+}
+
+###
+
+### Delete election
+
+DELETE {{VotingSystem_HostAddress}}/api/elections/a3debefd-d300-4061-8a3b-402118fab7d9
 
 ###

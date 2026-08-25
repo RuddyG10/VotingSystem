@@ -97,7 +97,7 @@ namespace Application.Services
             );
         }
 
-        public async Task<ElectionResponse?> UpdateAsync(Guid id, CreateElectionRequest request)
+        public async Task<ElectionResponse?> UpdateAsync(Guid id, UpdateElectionRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Name))
             {
