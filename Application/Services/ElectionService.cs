@@ -97,9 +97,42 @@ namespace Application.Services
             );
         }
 
-        public Task<ElectionResponse?> UpdateAsync(Guid id, CreateElectionRequest request)
+        public async Task<ElectionResponse?> UpdateAsync(Guid id, CreateElectionRequest request)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(request.Name))
+            {
+                throw new ArgumentException("Election name cannot be empty.");
+            }
+
+            if(request.EndDate <= request.StartDate)
+            {
+                throw new ArgumentException("End date must be after start date.");
+            }
+
+            var election = await _electionRepository.GetByIdAsync(id);
+            if (election is null) {
+                return null;
+            
+            }
+
+            election.Name = request.Name;
+            election.Description = request.Description;
+            election.StartDate = request.StartDate;
+            election.EndDate = request.EndDate;
+            election.IsActive = request.IsActive;
+
+            await _electionRepository.UpdateAsync(election);
+
+            return new ElectionResponse(
+                election.Id,
+                election.Name,
+                election.Description,
+                election.StartDate,
+                election.EndDate,
+                election.IsActive
+
+                );
+
         }
     }
 }
