@@ -10,5 +10,8 @@ namespace Application.Interfaces
         Task<IReadOnlyList<Election>> GetAllAsync();
         Task<Election?> GetByIdAsync(Guid id);
         Task AddAsync(Election election);
+
+        Task UpdateAsync(Election election);
+        Task DeleteAsync(Guid id);
     }
 }
