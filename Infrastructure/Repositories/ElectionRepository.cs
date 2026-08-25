@@ -34,8 +34,19 @@ namespace Infrastructure.Repositories
         public async Task<Election?> GetByIdAsync(Guid id)
         {
             return await _context.Elections
-                .AsNoTracking()
                 .FirstOrDefaultAsync(e => e.Id == id);
+        }
+
+        public async Task UpdateAsync(Election election)
+        {
+            _context.Elections.Update(election);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Election election)
+        {
+            _context.Elections.Remove(election);
+            await _context.SaveChangesAsync();
         }
     }
 }

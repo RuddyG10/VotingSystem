@@ -12,6 +12,6 @@ namespace Application.Interfaces
         Task AddAsync(Election election);
 
         Task UpdateAsync(Election election);
-        Task DeleteAsync(Guid id);
+        Task DeleteAsync(Election election);
     }
 }
