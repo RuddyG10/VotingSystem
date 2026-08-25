@@ -16,6 +16,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<VotingDbContext>(options=> options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
+builder.Services.AddScoped<ICandidateService, CandidateService>();
 builder.Services.AddScoped<IElectionRepository, ElectionRepository>();
 builder.Services.AddScoped<IElectionService, ElectionService>();
 
