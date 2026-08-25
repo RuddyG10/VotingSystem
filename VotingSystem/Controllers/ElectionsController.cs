@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Elections;
+using Application.Interfaces;
 using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
@@ -10,46 +11,51 @@ namespace API.Controllers
     [Route("api/elections")]
     public class ElectionsController : ControllerBase
     {
-        private readonly VotingDbContext _context;
+        private readonly IElectionService _electionService;
         
-        public ElectionsController(VotingDbContext context)
+        public ElectionsController(IElectionService electionService)
         {
-            _context = context;
+            _electionService = electionService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ElectionResponse>>> GetAll()
         {
-            var elections = await _context.Elections
-                .Select(e => new ElectionResponse
-                (
-                    e.Id,
-                   e.Name,
-                    e.Description,
-                    e.StartDate,
-                    e.EndDate,
-                   e.IsActive
-                )).ToListAsync();
-
+            var elections = await _electionService.GetAllAsync();
             return Ok(elections);
         }
 
         [HttpPost]
         public async Task<ActionResult<ElectionResponse>> Create(CreateElectionRequest request)
         {
-            var election  = new Election
+            try
             {
-                Id = Guid.NewGuid(),
-                Name = request.Name,
-                Description = request.Description,
-                StartDate = request.StartDate,
-                EndDate = request.EndDate,
-                IsActive = true
-            };
+                var election = await _electionService.CreateAsync(request);
 
-            _context.Elections.Add(election);
+                return CreatedAtAction(
+                    nameof(GetById),
+                    new { id = election.Id },
+                    election
+                );
 
-            await _context.SaveChangesAsync();
+            }
+            catch (ArgumentException ex)
+            {
+                // Log the exception (ex) here if needed
+                return BadRequest(ex.Message);
+            }
+            
+        }
+
+        [HttpGet("{id:guid}")]
+        public async Task<ActionResult<ElectionResponse>> GetById(Guid id)
+        {
+            var election = await _electionService.GetByIdAsync(id);
+
+            if (election is null)
+            {
+                return NotFound();
+            }
 
             var response = new ElectionResponse
             (
@@ -61,35 +67,10 @@ namespace API.Controllers
                 election.IsActive
             );
 
-            return CreatedAtAction(
-
-                nameof(GetAll),
-                new { id = election.Id },
-                response
-            );
+            return Ok(response);
         }
 
-        [HttpGet("{id:guid}")]
-        public async Task<ActionResult<ElectionResponse>> GetById(Guid id)
-        {
-            var election = await _context.Elections
-                .Where(e => e.Id == id)
-                .Select(e => new ElectionResponse
-                (
-                    e.Id,
-                    e.Name,
-                    e.Description,
-                    e.StartDate,
-                    e.EndDate,
-                    e.IsActive
-                )).FirstOrDefaultAsync();
 
-            if (election is null)
-            {
-                return NotFound();
-            }
-            return Ok(election);
-        }
 
        
     }
