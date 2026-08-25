@@ -1,6 +1,22 @@
 @VotingSystem_HostAddress = http://localhost:5067
 
-GET {{VotingSystem_HostAddress}}/weatherforecast/
+### Obtener elecciones
+
+GET {{VotingSystem_HostAddress}}/api/elections
 Accept: application/json
+
+###
+
+### Crear elección
+
+POST {{VotingSystem_HostAddress}}/api/elections
+Content-Type: application/json
+
+{
+  "name": "Elecciones Estudiantiles 2026",
+  "description": "Elección para representantes estudiantiles",
+  "startDate": "2026-09-01T08:00:00",
+  "endDate": "2026-09-01T18:00:00"
+}
 
 ###
