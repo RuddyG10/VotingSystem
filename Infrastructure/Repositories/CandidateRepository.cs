@@ -43,9 +43,10 @@ namespace Infrastructure.Repositories
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public Task UpdateAsync(Candidate candidate)
+        public async Task UpdateAsync(Candidate candidate)
         {
-            throw new NotImplementedException();
+            _context.Candidates.Update(candidate);
+            await _context.SaveChangesAsync();
         }
     }
 }

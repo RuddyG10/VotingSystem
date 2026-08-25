@@ -8,7 +8,24 @@ Accept: application/json
 ###
 
 ### Crear elección
+POST {{VotingSystem_HostAddress}}/api/elections
+Content-Type: application/json
 
+{
+  "name": "Student Elections 2026",
+  "description": "Student representative election",
+  "startDate": "2026-09-10T08:00:00",
+  "endDate": "2026-09-10T18:00:00"
+}
+###
+POST {{VotingSystem_HostAddress}}/api/elections/7e9ee5d8-91d9-4c6f-b94d-4ff5c17ecde6/candidates
+Content-Type: application/json
+
+{
+  "name": "Candidate A",
+  "description": "First candidate"
+}
+###
 POST {{VotingSystem_HostAddress}}/api/elections
 Content-Type: application/json
 
@@ -38,5 +55,49 @@ Content-Type: application/json
 ### Delete election
 
 DELETE {{VotingSystem_HostAddress}}/api/elections/a3debefd-d300-4061-8a3b-402118fab7d9
+
+###
+
+### Get candidates for election
+
+GET {{VotingSystem_HostAddress}}/api/elections/a3debefd-d300-4061-8a3b-402118fab7d9/candidates
+Accept: application/json
+
+###
+
+### Get candidate
+
+GET {{VotingSystem_HostAddress}}/api/candidates/{{candidateId}}
+Accept: application/json
+
+###
+
+### Create candidate
+
+POST {{VotingSystem_HostAddress}}/api/elections/a3debefd-d300-4061-8a3b-402118fab7d9/candidates
+Content-Type: application/json
+
+{
+  "name": "Candidate A",
+  "description": "Candidate description"
+}
+
+###
+
+### Update candidate
+
+PUT {{VotingSystem_HostAddress}}/api/candidates/{{candidateId}}
+Content-Type: application/json
+
+{
+  "name": "Candidate A Updated",
+  "description": "Updated candidate"
+}
+
+###
+
+### Delete candidate
+
+DELETE {{VotingSystem_HostAddress}}/api/candidates/{{candidateId}}
 
 ###
