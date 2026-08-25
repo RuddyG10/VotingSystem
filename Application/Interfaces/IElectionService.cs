@@ -10,7 +10,7 @@ namespace Application.Interfaces
         Task<IReadOnlyList<ElectionResponse>> GetAllAsync();
         Task<ElectionResponse> GetByIdAsync(Guid id);
         Task<ElectionResponse> CreateAsync(CreateElectionRequest request);
-        Task<ElectionResponse?> UpdateAsync(Guid id, CreateElectionRequest request);
+        Task<ElectionResponse?> UpdateAsync(Guid id, UpdateElectionRequest request);
         Task<bool> DeleteAsync(Guid id);
     }
 }

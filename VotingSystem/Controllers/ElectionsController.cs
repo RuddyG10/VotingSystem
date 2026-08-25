@@ -70,8 +70,31 @@ namespace API.Controllers
             return Ok(response);
         }
 
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<ElectionResponse>> update(
+            Guid id,
+            UpdateElectionRequest request)
+        {
+            try
+            {
+                var election = await _electionService.UpdateAsync(
+                    id,
+                    request);
+
+                if (election is null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(election);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
 
+        }
        
     }
 }
