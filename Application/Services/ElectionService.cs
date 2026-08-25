@@ -49,6 +49,19 @@ namespace Application.Services
             );
         }
 
+        public async Task<bool> DeleteAsync(Guid id)
+        {
+            var election = await _electionRepository.GetByIdAsync(id);
+
+            if (election is null)
+            {
+                throw new KeyNotFoundException($"Election with ID {id} not found.");
+            }
+
+            await _electionRepository.DeleteAsync(election);
+            return true;
+        }
+
         public async Task<IReadOnlyList<ElectionResponse>> GetAllAsync()
         {
             var elections = await _electionRepository.GetAllAsync();
@@ -82,6 +95,11 @@ namespace Application.Services
                 election.EndDate,
                 election.IsActive
             );
+        }
+
+        public Task<ElectionResponse?> UpdateAsync(Guid id, CreateElectionRequest request)
+        {
+            throw new NotImplementedException();
         }
     }
 }
