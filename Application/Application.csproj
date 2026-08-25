@@ -14,8 +14,6 @@
     <Folder Include="DTOs\Candidates\" />
     <Folder Include="DTOs\Votes\" />
     <Folder Include="DTOs\Users\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
